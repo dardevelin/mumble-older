@@ -32,6 +32,7 @@ public:
 private:
 	Server *m_server;
 	QHash<unsigned int, std::shared_ptr<rtc::PeerConnection>> m_connections;
+	int m_port = 8443;
 	
 	void setupPeerConnection(ServerUser *user);
 	void routeAudioToNative(ServerUser *user, const QByteArray &data);

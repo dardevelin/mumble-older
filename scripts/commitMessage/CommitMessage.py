@@ -19,7 +19,7 @@ class CommitMessage:
         if len(lines) < 1 or lines[0].strip() == "":
             raise CommitFormatError("Invalid commit content")
 
-        subjectPattern = re.compile("^([A-Z\-_/]+)(?:\(([0-9a-zA-Z\-_, ]+)\))?:\s*(.+)$")
+        subjectPattern = re.compile(r"^([A-Z\-_/]+)(?:\(([0-9a-zA-Z\-_, ]+)\))?:\s*(.+)$")
 
         match = re.match(subjectPattern, lines[0])
 
