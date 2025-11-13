@@ -831,6 +831,21 @@ if(manual-plugin)
 target_compile_definitions(mumble_client_object_lib PUBLIC "USE_MANUAL_PLUGIN")
 endif()
 
+if(webrtc)
+	target_sources(mumble_client_object_lib
+		PRIVATE
+			"webrtc/WebRTCConnection.cpp"
+			"webrtc/WebRTCConnection.h"
+			"${CMAKE_SOURCE_DIR}/src/shared/webrtc/WebRTCUtils.cpp"
+			"${CMAKE_SOURCE_DIR}/src/shared/webrtc/WebRTCUtils.h"
+			"${CMAKE_SOURCE_DIR}/src/shared/webrtc/WebRTCConfig.h"
+	)
+	
+	target_compile_definitions(mumble_client_object_lib PUBLIC "USE_WEBRTC")
+	target_link_libraries(mumble_client_object_lib PUBLIC datachannel::datachannel)
+	target_include_directories(mumble_client_object_lib PRIVATE ${CMAKE_SOURCE_DIR}/3rdparty/libdatachannel/include)
+endif()
+
 if(NOT update)
 	target_compile_definitions(mumble_client_object_lib PUBLIC "NO_UPDATE_CHECK")
 endif()

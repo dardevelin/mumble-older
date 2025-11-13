@@ -283,6 +283,21 @@ if(ice)
 	file(COPY "${ICE_FILE}" DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
+if(webrtc)
+	target_sources(mumble_server_object_lib
+		PRIVATE
+			"webrtc/WebRTCHandler.cpp"
+			"webrtc/WebRTCHandler.h"
+			"${CMAKE_SOURCE_DIR}/src/shared/webrtc/WebRTCUtils.cpp"
+			"${CMAKE_SOURCE_DIR}/src/shared/webrtc/WebRTCUtils.h"
+			"${CMAKE_SOURCE_DIR}/src/shared/webrtc/WebRTCConfig.h"
+	)
+	
+	target_compile_definitions(mumble_server_object_lib PUBLIC "USE_WEBRTC")
+	target_link_libraries(mumble_server_object_lib PUBLIC datachannel::datachannel)
+	target_include_directories(mumble_server_object_lib PRIVATE ${CMAKE_SOURCE_DIR}/3rdparty/libdatachannel/include)
+endif()
+
 install(TARGETS mumble-server RUNTIME DESTINATION "${MUMBLE_INSTALL_EXECUTABLEDIR}" COMPONENT mumble_server)
 
 if(packaging)

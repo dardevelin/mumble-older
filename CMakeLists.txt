@@ -66,6 +66,9 @@ option(packaging "Build package." OFF)
 option(tests "Build tests." ${packaging})
 option(plugins "Build plugins." ON)
 
+option(webrtc "Build with WebRTC support (EXPERIMENTAL)" OFF)
+option(webrtc-strict "Require WebRTC support" OFF)
+
 if (WIN32)
 	option(skip-msi-rebuild "Prevent rebuilding installer MSI files from source. Used to be able to include signed MSI files in the bundle." OFF)
 endif()
@@ -167,6 +170,10 @@ if(bundled-utfcpp)
 else()
 	find_pkg("utf8cpp" REQUIRED)
 	add_library(utfcpp ALIAS utf8cpp::utf8cpp)
+endif()
+
+if(webrtc)
+	add_subdirectory(${3RDPARTY_DIR}/libdatachannel)
 endif()
 
 if(g15 AND WIN32)
