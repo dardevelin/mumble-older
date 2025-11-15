@@ -1,0 +1,9 @@
+This file documents the commit message fix that was applied.
+
+The following commits were rewritten to use UPPERCASE type names:
+- "feat(webrtc)" -> "FEAT(webrtc)"
+- "docs(webrtc)" -> "DOCS(webrtc)" 
+- "chore:" -> "MAINT:"
+- "Initial plan" was removed (empty commit)
+
+All commits now pass the commit style check.
